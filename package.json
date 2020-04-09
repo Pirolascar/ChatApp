@@ -8,6 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "expo": "~37.0.3",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
