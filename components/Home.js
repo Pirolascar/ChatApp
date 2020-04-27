@@ -9,27 +9,28 @@ export class Home extends React.Component {
 
     state={
         user: '',
-        room: ''
+        channel: ''
     }
 
     handleUserChange = user => {
         this.setState({user});
     }
 
-    handleRoomChange = room => {
-        this.setState({room});
+    handleRoomChange = channel => {
+        this.setState({channel});
     }
 
     handleChatPress = e => {
         const {dispatch} = this.props;
-        const {user, room} = this.state;
-        dispatch(chatActions.join(user, room));
-        Actions.chat({title: `Salon "${room}"`});
+        const {user, channel} = this.state;
+        dispatch(chatActions.join(user, channel));
+        Actions.chat({title: `Salon "${channel}"`});
     }
+
 
     render() {
         const {user} = this.state;
-        const {room} = this.state;
+        const {channel} = this.state;
 
         return (
             <View style = {styles.container}>
@@ -46,7 +47,7 @@ export class Home extends React.Component {
 
                 <Text style = {styles.label}>Salon</Text>
                 <TextInput
-                    value={room}
+                    value={channel}
                     onChangeText={this.handleRoomChange}
                     style={styles.input}
                     placeholder="Salon de chat"
@@ -92,6 +93,6 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     button: {
-        backgroundColor: "red"
+        backgroundColor: "yellow"
     }
   });

@@ -27,6 +27,8 @@ export class MessageItem extends React.Component{
     }
 }
 
+
+
 const styles = StyleSheet.create({
     root: {
       padding: 8,

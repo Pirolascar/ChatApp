@@ -2,7 +2,7 @@ import PouchDB from 'pouchdb-react-native';
 
 const REMOTE_DB = 'http://gathor.org:5984/';
 
-let db, currentUser, currentroom, sync = null;
+let db, thisUser, thisRoom, sync = null;
 
 export const chatService = {
     join,
@@ -14,9 +14,9 @@ export const chatService = {
         if(/^_/.test(room)){
             onFail('Le nom du salon ne peut pas commencer par "_"');
         }
-        currentUser = user || 'Anonymous';
-        currentroom = room.toLowerCase() || 'général';
-        db = new PouchDB(currentroom);
+        thisUser = user || 'Anonymous';
+        thisRoom = room.toLowerCase() || 'général';
+        db = new PouchDB(thisRoom);
 
  //       return db.allDocs({
  //           include_docs: true,
@@ -25,7 +25,7 @@ export const chatService = {
  //           .map(row => row.doc)
  //           .sort((a,b) => a.created_at > b.created_at)
  //           );
-            sync = db.sync(`${REMOTE_DB}/${currentroom}`, {
+            sync = db.sync(`${REMOTE_DB}/${thisRoom}`, {
                 live: true,
                 retry: true,
                 continuous: true
@@ -61,7 +61,7 @@ export const chatService = {
     function sendMessage(message) {
         message = {
             ...message,
-             author: currentUser,
+             author: thisUser,
              created_at: new Date()
             };
         return db.post(message).then(({id}) => ({

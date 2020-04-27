@@ -6,14 +6,14 @@ import {chatActions} from '../actions';
 
 @connect (({chat:
                 {user,
-                room,
+                channel,
                 messages,
                 error}
-}) => ({user, room, messages, error}))
+}) => ({user, channel, messages, error}))
 export class Chat extends React.Component {
 
 state = {
-    content: ''
+    text: ''
 }
 
 getData() {
@@ -23,24 +23,24 @@ getData() {
     }));
 }
 
-handleContentChange = content => {
-    this.setState({content});
+handleContentChange = text => {
+    this.setState({text});
 }
 
 handleSendPress = e => {
     const {dispatch} = this.props;
-    const {content} = this.state;
-    if(content != '') 
+    const {text} = this.state;
+    if(text != '') 
     {
-        dispatch(chatActions.sendMessage({content}));
+        dispatch(chatActions.sendMessage({text}));
     }
-    this.setState({content: ''});
+    this.setState({text: ''});
 }
 
 
     render() {
         const {user, error} = this.props;
-        const {content} = this.state;
+        const {text} = this.state;
 
         return (
             <View style = {styles.container}>              
@@ -59,14 +59,14 @@ handleSendPress = e => {
                       
                         style={styles.composerInput}
                         placeholder="Write something"
-                        value={content}
+                        value={text}
                         onChangeText={this.handleContentChange}
                     />
 
                     <Button
                     title="Send"   
                     onPress={this.handleSendPress} 
-                    disabled={content ==''}               
+                    disabled={text ==''}               
                     />
                 </View>              
 

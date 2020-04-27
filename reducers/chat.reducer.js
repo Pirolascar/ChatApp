@@ -1,7 +1,7 @@
 
 const initState = {
-    user: "Robert",
-    room: null,
+    user: "Matthieu",
+    channel: null,
     messages: [],
     error: undefined
 }
@@ -13,7 +13,7 @@ export const chat = function(state = initState, action) {
             return{
                 ...state,
                 user: action.user,
-                room: action.room,
+                channel: action.channel,
                 error: null
             };
 
